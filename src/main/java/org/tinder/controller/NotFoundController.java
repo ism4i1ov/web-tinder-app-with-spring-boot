@@ -1,4 +1,4 @@
-package org.tinder.tinder.controller;
+package org.tinder.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -10,6 +10,6 @@ public class NotFoundController {
 
     @GetMapping
     public String getTemplate() {
-        return "notfound";
+        return "not-found";
     }
 }
