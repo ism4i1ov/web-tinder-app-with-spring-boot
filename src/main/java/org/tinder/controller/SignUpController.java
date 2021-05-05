@@ -5,8 +5,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.tinder.entity.User;
-import org.tinder.entity.UserInfo;
-import org.tinder.service.SignUpService;
+import org.tinder.entity.form.UserForm;
+import org.tinder.service.impl.SignUpServiceImpl;
 
 import java.time.LocalDateTime;
 
@@ -14,11 +14,11 @@ import java.time.LocalDateTime;
 @RequestMapping("sign_up")
 public class SignUpController {
 
-    private final SignUpService signUpService;
+    private final SignUpServiceImpl signUpServiceImpl;
 
     @Autowired
-    public SignUpController(SignUpService signUpService) {
-        this.signUpService = signUpService;
+    public SignUpController(SignUpServiceImpl signUpServiceImpl) {
+        this.signUpServiceImpl = signUpServiceImpl;
     }
 
     @GetMapping
@@ -27,7 +27,7 @@ public class SignUpController {
     }
 
     @PostMapping
-    public String createUser(@ModelAttribute UserInfo user, Model map) {
+    public String createUser(@ModelAttribute UserForm user, Model map) {
         User newUser = new User();
         newUser.setName(user.getName());
         newUser.setSurname(user.getSurname());
@@ -38,7 +38,7 @@ public class SignUpController {
         newUser.setLastLogin(LocalDateTime.now());
 
         if (!user.getPassword().equals(user.getConfirm_password())) return "redirect:not-found";
-        return signUpService.createUser(newUser).map(opUser -> {
+        return signUpServiceImpl.createUser(newUser).map(opUser -> {
             map.addAttribute("user", opUser);
             return "redirect:like-page";
         }).orElse("redirect:not_found");
