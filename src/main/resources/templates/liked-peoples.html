@@ -4,8 +4,8 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
-    <meta name="author" content="Elvin Taghizade">
-
+    <meta name="author" content="Ismayil Ismayilov">
+    <link rel="icon" href="img/favicon.ico">
     <title>People list</title>
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css"
           integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
@@ -59,16 +59,13 @@
                                     <div class="avatar-img">
                                         <img class="img-circle" th:src="${likeUser.getAvatarLink()}" alt=""/>
                                     </div>
-
                                 </td>
-                                <td class="align-middle" th:text="${likeUser.getName()}  + ${likeUser.getSurname}">
-
+                                <td class="align-middle" th:text="${likeUser.getFullName()}">
                                 </td>
                                 <td class="align-middle" th:text="${likeUser.getProfession()}">
-
                                 </td>
-                                <td class="align-middle">
-                                    Last Login: 6/10/2017<br><small class="text-muted">5 days ago</small>
+                                <td class="align-middle" th:text=" ${likeUser.getLastLogin()}">
+                                    <br><small class="text-muted" ></small>
                                 </td>
                             </tr>
                             </tbody>

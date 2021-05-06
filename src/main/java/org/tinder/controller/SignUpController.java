@@ -4,10 +4,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.tinder.dto.UserDto;
 import org.tinder.entity.User;
 import org.tinder.entity.form.UserForm;
 import org.tinder.service.impl.SignUpServiceImpl;
 
+import javax.servlet.http.HttpSession;
 import java.time.LocalDateTime;
 
 @Controller
@@ -22,12 +24,17 @@ public class SignUpController {
     }
 
     @GetMapping
-    public String getTemplate() {
+    public String getTemplate(HttpSession session) {
+        UserDto user = (UserDto) session.getAttribute("user");
+        if (user != null) {
+            return "redirect:like-page";
+        }
         return "sign_up";
     }
 
     @PostMapping
     public String createUser(@ModelAttribute UserForm user, Model map) {
+
         User newUser = new User();
         newUser.setName(user.getName());
         newUser.setSurname(user.getSurname());

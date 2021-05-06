@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.tinder.dto.UserDto;
 import org.tinder.entity.User;
 import org.tinder.service.impl.LoginServiceImpl;
 
@@ -33,7 +34,8 @@ public class LoginController {
             if (!user.getPassword().equals(password)) {
                 return "redirect:not-found";
             }
-            session.setAttribute("user", user);
+            UserDto userDto = UserDto.toDto(user);
+            session.setAttribute("user", userDto);
             return "redirect:like-page";
         }).orElse("redirect:not-found");
     }
