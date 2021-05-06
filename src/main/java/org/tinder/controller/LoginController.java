@@ -18,7 +18,11 @@ public class LoginController {
     private final LoginServiceImpl loginServiceImpl;
 
     @GetMapping
-    public String getTemplate() {
+    public String getTemplate(HttpSession session) {
+        User user = (User) session.getAttribute("user");
+        if(user != null){
+            return "redirect:like-page";
+        }
         return "login";
     }
 

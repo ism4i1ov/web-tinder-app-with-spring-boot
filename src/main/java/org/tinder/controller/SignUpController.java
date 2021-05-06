@@ -41,7 +41,7 @@ public class SignUpController {
         return signUpServiceImpl.createUser(newUser).map(opUser -> {
             map.addAttribute("user", opUser);
             return "redirect:like-page";
-        }).orElse("redirect:not_found");
+        }).orElse("redirect:not-found");
         // aida457qahan
     }
 }

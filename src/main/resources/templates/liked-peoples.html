@@ -11,8 +11,38 @@
           integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
     <link href="../css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="../css/style.css">
+    <style>
+        header {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+        }
+
+        #btn {
+            border-radius: 12px;
+            width: 80px;
+            height: 30px;
+            line-height: 15px;
+            font-size: 14px;
+            font-weight: 500;
+            font-family: cursive;
+            transition: .3s all;
+        }
+
+        .btn:hover {
+            background: white;
+            transition: .3s all;
+        }
+    </style>
 </head>
 <body>
+<header>
+    <form action="/logout" method="post">
+        <div id="logout">
+            <button type="submit" id="btn" class="btn btn-sm btn-warning">Log out</button>
+        </div>
+    </form>
+</header>
 <div class="container">
     <div class="row">
         <div class="col-8 offset-2">
@@ -24,69 +54,18 @@
                     <div class="table-container">
                         <table class="table-users table" style="border: 0">
                             <tbody>
-                            <tr>
+                            <tr th:each="likeUser: ${likedUsers}">
                                 <td style="width:10px">
                                     <div class="avatar-img">
-                                        <img class="img-circle" src="../img/java.png" alt=""/>
+                                        <img class="img-circle" th:src="${likeUser.getAvatarLink()}" alt=""/>
                                     </div>
 
                                 </td>
-                                <td class="align-middle">
-                                    Herbert Hoover
-                                </td>
-                                <td class="align-middle">
-                                    Builder Sales Agent
-                                </td>
-                                <td class="align-middle">
-                                    Last Login: 6/10/2017<br><small class="text-muted">5 days ago</small>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td style="width:10px">
-                                    <div class="avatar-img">
-                                        <img class="img-circle" src="../img/java.png" alt=""/>
-                                    </div>
+                                <td class="align-middle" th:text="${likeUser.getName()}  + ${likeUser.getSurname}">
 
                                 </td>
-                                <td class="align-middle">
-                                    Herbert Hoover
-                                </td>
-                                <td class="align-middle">
-                                    Builder Sales Agent
-                                </td>
-                                <td class="align-middle">
-                                    Last Login: 6/10/2017<br><small class="text-muted">5 days ago</small>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td style="width:10px">
-                                    <div class="avatar-img">
-                                        <img class="img-circle" src="../img/java.png" alt=""/>
-                                    </div>
+                                <td class="align-middle" th:text="${likeUser.getProfession()}">
 
-                                </td>
-                                <td class="align-middle">
-                                    Herbert Hoover
-                                </td>
-                                <td class="align-middle">
-                                    Builder Sales Agent
-                                </td>
-                                <td class="align-middle">
-                                    Last Login: 6/10/2017<br><small class="text-muted">5 days ago</small>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td style="width:10px">
-                                    <div class="avatar-img">
-                                        <img class="img-circle" src="../img/java.png" alt=""/>
-                                    </div>
-
-                                </td>
-                                <td class="align-middle">
-                                    Herbert Hoover
-                                </td>
-                                <td class="align-middle">
-                                    Builder Sales Agent
                                 </td>
                                 <td class="align-middle">
                                     Last Login: 6/10/2017<br><small class="text-muted">5 days ago</small>

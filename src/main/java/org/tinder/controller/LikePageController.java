@@ -22,18 +22,26 @@ public class LikePageController {
 
     @GetMapping
     public String getTemplate(HttpSession session, Model model) {
-        //User user = (User) model.getAttribute("user");
         User user = (User) session.getAttribute("user");
+        if (user == null) {
+            return "redirect:not-found";
+        }
         Long id = user.getId();
         User enemy = usersLike.getUsersForLike(id);
+        if (enemy == null) {
+            return "redirect:people-list";
+        }
         model.addAttribute("enemy", enemy);
         session.setAttribute("enemy", enemy);
         return "like-page";
     }
 
     @PostMapping
-    public String getNextUser(Model model, HttpSession httpSession) {
+    public String getNextUser(HttpSession httpSession) {
         User user = (User) httpSession.getAttribute("user");
+        if (user == null) {
+            return "redirect:not-found";
+        }
         User enemy = (User) httpSession.getAttribute("enemy");
         usersLike.likeOrDislikeUser(user.getId(), enemy.getId(), 1L);
         return "redirect:like-page";

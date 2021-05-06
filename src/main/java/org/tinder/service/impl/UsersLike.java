@@ -7,6 +7,7 @@ import org.tinder.entity.UsersLikes;
 import org.tinder.repository.UserLikesRepository;
 import org.tinder.repository.UserRepository;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -26,5 +27,9 @@ public class UsersLike {
         } else {
             userLikesRepository.likeOrDislikeUser(likerUserId, likedUserId, likeId);
         }
+    }
+
+    public List<User> getLikedUsers(Long likerUserId){
+        return userRepository.getLikedUsers(likerUserId);
     }
 }
