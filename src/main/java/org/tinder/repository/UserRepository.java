@@ -12,8 +12,14 @@ import java.util.Optional;
 public interface UserRepository extends JpaRepository<User, Long> {
 
     @Query(nativeQuery = true,
-            value = "select u.* from users_likes ul RIGHT JOIN users u on ul.liked_user_id = u.id\n" +
-                    "where u.id <> ?1 and (ul.like_id <> 1 or ul.like_id is null) order by  rand() limit 1")
+            value = "select u.*\n" +
+                    "from users u\n" +
+                    "where (select count(*)\n" +
+                    "       from users_likes\n" +
+                    "       where (like_id = 1 or like_id is null)\n" +
+                    "         and liker_user_id = ?1\n" +
+                    "         and liked_user_id = u.id) = 0\n" +
+                    "  and u.id != ?1 order by  rand() limit 1")
     User findUsersToLike(Long userId);
 
     Optional<User> findByUsername(String username);
